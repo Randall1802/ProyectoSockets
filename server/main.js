@@ -10,7 +10,7 @@ var server = require('http').Server(app);
 */
 var io = require('socket.io')(server);
 
-appget('/', function(req, res){
+app.get('/', function(req, res){
     res.status(200).send("Hola Mundo geis");
 });
 
