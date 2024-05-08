@@ -1,4 +1,4 @@
-var express = require ('express');
+var express = require('express');
 var app = express();
 
 /*como trabajaremos con socket, es recomendable usar el modulo HTTP para pasarle la app a express y manejar bien http*/
@@ -10,10 +10,18 @@ var server = require('http').Server(app);
 */
 var io = require('socket.io')(server);
 
+/*usamos un middleware pa usar elementos estaticos en la seccion publica de la aplicacion*/
+app.use(express.static('public'));
+
 app.get('/', function(req, res){
     res.status(200).send("Hola Mundo geis");
 });
 
-server.listen(3010, function(){
-    console.log("el server esta corriendo en http://localhost:3010")
+/*de esta forma activamos socket pa que escuche. mandamos un msj de control por consola pa saber q pasa y tenemos q hacer q el msj venga del nav web mediante html y js*/
+io.on('connection', function(socket){
+  console.log('Alguien se ha conectado con sockets');
+});
+
+server.listen(3011, function(){
+    console.log("el server esta corriendo en http://localhost:3011")
 });
