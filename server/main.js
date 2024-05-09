@@ -19,7 +19,13 @@ app.get('/', function(req, res){
 
 /*de esta forma activamos socket pa que escuche. mandamos un msj de control por consola pa saber q pasa y tenemos q hacer q el msj venga del nav web mediante html y js*/
 io.on('connection', function(socket){
-  console.log('Alguien se ha conectado con sockets');
+  console.log('Alguien se ha conectado con sockets')
+  /* aqui controlamos los eventos del cliente mediante sockets */
+  socket.emit('messages', {
+    id: 1,
+    texto: "hola soy un mesaje de randi",
+    autor: "Randi errera"
+  });
 });
 
 server.listen(3011, function(){
