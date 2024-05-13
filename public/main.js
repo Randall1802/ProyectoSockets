@@ -16,12 +16,20 @@ socket.on('messages', function (data){
 function render(data){
     //aqui se inicia el manejo de string que viene en em6 se usan estas comillas ``
     //las variables se colocan con $ y entre {}
-    var html = `<div>
-                     <strong>${data.autor}</strong>:
-                     <em>${data.texto}</em>
-                </div>`;
+    //var html = `<div>
+      //               <strong>${data.autor}</strong>:
+        //             <em>${data.texto}</em>
+          //      </div>`;
 
-            document.getElementById('messages').innerHTML = html;
+            //document.getElementById('messages').innerHTML = html;
+    //reestructuramos esta seccion pa que se maneje el array. elem es un conjunto de cosas. con map recorremos el array
+    var html = data.map(function (elem, index){
+        return(`<div>
+                     <strong>${elem.autor}</strong>:
+                     <em>${elem.texto}</em>
+                </div>`);}).join(" ");
+    
+    document.getElementById('messages').innerHTML = html;
 }
 
 //cada vez que alguien presione el boton enviar en el formulario

@@ -9,6 +9,12 @@ var server = require('http').Server(app);
   se pasa la variable server que tiene la app express y HTTP
 */
 var io = require('socket.io')(server);
+//array q guarda los msjs 
+var messages = [{
+  id: 1, 
+  texto: "hola soy un mesaje de randi",
+  autor: "Randi errera"
+}];
 
 /*usamos un middleware pa usar elementos estaticos en la seccion publica de la aplicacion*/
 app.use(express.static('public'));
@@ -21,10 +27,21 @@ app.get('/', function(req, res){
 io.on('connection', function(socket){
   console.log('Alguien se ha conectado con sockets')
   /* aqui controlamos los eventos del cliente mediante sockets */
-  socket.emit('messages', {
-    id: 1,
-    texto: "hola soy un mesaje de randi",
-    autor: "Randi errera"
+  //socket.emit('messages', {
+    //id: 1,
+    //texto: "hola soy un mesaje de randi",
+    //autor: "Randi errera"
+  //});
+  //modificamos el emit mandando el array
+  socket.emit('messages', messages);
+
+  //ahora queremos escuchat los msjs mandados por el cliente
+  socket.on('new-message', function(data){
+    //parea poder guardar estos msjs lo ideal seria en una bd
+    //pa este ejercicio usaremos arrays (no good pa produccion)
+    messages.push(data);
+    //queremos que todos los msjs s emanden a todos los clientes
+    io.sockets.emit('messages', messages);
   });
 });
 
