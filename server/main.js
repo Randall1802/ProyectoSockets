@@ -1,6 +1,8 @@
 var express = require('express');
 var app = express();
 
+const cors = require('cors');
+
 /*como trabajaremos con socket, es recomendable usar el modulo HTTP para pasarle la app a express y manejar bien http*/
 var server = require('http').Server(app);
 
@@ -18,6 +20,7 @@ var messages = [{
 
 /*usamos un middleware pa usar elementos estaticos en la seccion publica de la aplicacion*/
 app.use(express.static('public'));
+app.use(cors());
 
 app.get('/', function(req, res){
     res.status(200).send("Hola Mundo geis");

@@ -1,6 +1,6 @@
 {
   "name": "proyectosockets",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "proyecto de sockets para fullstack con front y back",
   "main": "index.js",
   "scripts": {
@@ -9,6 +9,7 @@
   "author": "randy herrera",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.19.2",
     "socket.io": "^4.7.5"
   }
