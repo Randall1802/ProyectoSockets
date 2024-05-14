@@ -10,7 +10,12 @@ var server = require('http').Server(app);
   se requiere la libreria socket.io
   se pasa la variable server que tiene la app express y HTTP
 */
-var io = require('socket.io')(server);
+var io = require('socket.io')(server, {
+    cors: {
+        origin: '*', // Dirección del servidor frontend
+        methods: ['GET', 'POST']
+    }
+});
 //array q guarda los msjs 
 var messages = [{
   id: 1, 
@@ -20,7 +25,15 @@ var messages = [{
 
 /*usamos un middleware pa usar elementos estaticos en la seccion publica de la aplicacion*/
 app.use(express.static('public'));
-app.use(cors());
+
+const corsOptions = {
+    origin: '*', // Reemplaza con la dirección del servidor de tu frontend
+    methods: ['GET', 'POST'], // Métodos HTTP permitidos
+    allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
+};
+
+app.use(cors(corsOptions));
+
 
 app.get('/', function(req, res){
     res.status(200).send("Hola Mundo geis");

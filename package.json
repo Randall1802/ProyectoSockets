@@ -1,6 +1,6 @@
 {
   "name": "proyectosockets",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "proyecto de sockets para fullstack con front y back",
   "main": "index.js",
   "scripts": {
